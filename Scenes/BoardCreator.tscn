@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkudg3xr8gno2"]
+
+[ext_resource type="Script" uid="uid://dm43sfqwj8ovs" path="res://Scripts/PreProduction/BoardCreator.gd" id="1_5yni6"]
+
+[node name="BoardCreator" type="Node3D"]
+script = ExtResource("1_5yni6")
+height = 9
+pos = Vector2i(7, 5)
+fileName = "map2.txt"
