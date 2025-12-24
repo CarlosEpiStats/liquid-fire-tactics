@@ -5,6 +5,9 @@ class_name Tile
 const stepHeight: float = 0.25
 var pos: Vector2i # integer vector
 var height: int
+var content: Node
+var prev: Tile
+var distance: int
 
 # Convenience, get the value of the top edge, useful for placing things on top
 func center() -> Vector3:
