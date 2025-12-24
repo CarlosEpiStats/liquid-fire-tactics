@@ -112,12 +112,36 @@ func _ShrinkRect(rect: Rect2i):
 
 func Save():
 	var saveFile = savePath + fileName
+	SaveMap(saveFile)
+
+
+func Load():
+	var saveFile = savePath + fileName
+	LoadMap(saveFile)
+
+
+func SaveJSON():
+	#var saveFile = savePath + fileName
+	#var save_game = FileAccess.open(saveFile, FileAccess.WRITE)
+	var saveFile = "res://Data/Levels/savegame.json"
+	SaveMapJSON(saveFile)
+
+
+func LoadJSON():
+	#var saveFile = savePath + fileName
+	#var save_game = FileAccess.open(saveFile, FileAccess.WRITE)
+	var saveFile = "res://Data/Levels/savegame.json"
+	LoadMapJSON(saveFile)
+
+
+func SaveMap(saveFile):
 	var save_game = FileAccess.open(saveFile, FileAccess.WRITE)
 	var version = 1
 	var size = tiles.size()
 	
 	save_game.store_8(version)
 	save_game.store_16(size)
+	
 	for key in tiles:
 		save_game.store_8(key.x)
 		save_game.store_8(key.y)
@@ -125,10 +149,9 @@ func Save():
 		
 	save_game.close()
 
-func Load():
+func LoadMap(saveFile):
 	Clear()
 	
-	var saveFile = savePath + fileName
 	if not FileAccess.file_exists(saveFile):
 		return # Error! We don't have a save to load.
 		
@@ -148,7 +171,7 @@ func Load():
 	save_game.close()
 	_UpdateMarker()
 
-func SaveJSON():
+func SaveMapJSON(saveFile):
 	var main_dict = {
 		"version": "1.0.0",
 		"tiles": []
@@ -161,25 +184,19 @@ func SaveJSON():
 			"height" : tiles[key].height
 			}
 		main_dict["tiles"].append(save_dict)
-
-	# Uncomment this if JSON is your preferred way of saving the data
-	#var saveFile = savePath + fileName
-	#var save_game = FileAccess.open(saveFile, FileAccess.WRITE)
-	var save_game = FileAccess.open("res://Data/Levels/savegame.json", FileAccess.WRITE)
+	
+	var save_game = FileAccess.open(saveFile, FileAccess.WRITE)
 	
 	var json_string = JSON.stringify(main_dict, "\t", false)
 	save_game.store_line(json_string)
 
-func LoadJSON():
+func LoadMapJSON(saveFile):
 	Clear()
 
-	#var saveFile = savePath + fileName
-	#if not FileAccess.file_exists(saveFile):
-	if not FileAccess.file_exists("res://Data/Levels/savegame.json"):
+	if not FileAccess.file_exists(saveFile):
 		return # Error! We don't have a save to load.
 	
-	#var save_game = FileAccess.open(saveFile, FileAccess.READ)
-	var save_game = FileAccess.open("res://Data/Levels/savegame.json", FileAccess.READ)
+	var save_game = FileAccess.open(saveFile, FileAccess.READ)
 
 	var json_text = save_game.get_as_text()
 	var json = JSON.new()

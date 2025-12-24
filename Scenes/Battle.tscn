@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://delq86m0lvplv"]
+
+[ext_resource type="Script" uid="uid://djvnewx62p2f7" path="res://Scripts/Controller/BattleController.gd" id="1_wvl2i"]
+[ext_resource type="Script" uid="uid://bscdcyds5oxfs" path="res://Scripts/Controller/InputController.gd" id="2_1samx"]
+[ext_resource type="Script" uid="uid://dm43sfqwj8ovs" path="res://Scripts/PreProduction/BoardCreator.gd" id="2_vr6xi"]
+[ext_resource type="Script" uid="uid://bsj5ybfxsdejl" path="res://Scripts/Controller/CameraController.gd" id="4_p46lj"]
+[ext_resource type="Script" uid="uid://c0qgtw38vogj3" path="res://Scripts/Test/Test.gd" id="5_p46lj"]
+
+[node name="Battle" type="Node3D"]
+
+[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "inputController", "cameraController")]
+script = ExtResource("1_wvl2i")
+board = NodePath("Board")
+inputController = NodePath("Input Controller")
+cameraController = NodePath("Camera Controller")
+
+[node name="Input Controller" type="Node" parent="Battle Controller"]
+script = ExtResource("2_1samx")
+
+[node name="Board" type="Node3D" parent="Battle Controller"]
+script = ExtResource("2_vr6xi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Battle Controller"]
+
+[node name="Camera Controller" type="Node3D" parent="Battle Controller"]
+script = ExtResource("4_p46lj")
+
+[node name="Heading" type="Node3D" parent="Battle Controller/Camera Controller"]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
+
+[node name="Pitch" type="Node3D" parent="Battle Controller/Camera Controller/Heading"]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Battle Controller/Camera Controller/Heading/Pitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+projection = 1
+size = 10.0
+
+[node name="Test" type="Node" parent="Battle Controller"]
+script = ExtResource("5_p46lj")
