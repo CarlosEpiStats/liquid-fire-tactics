@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://delq86m0lvplv"]
+[gd_scene load_steps=33 format=3 uid="uid://delq86m0lvplv"]
 
-[ext_resource type="Script" uid="uid://djvnewx62p2f7" path="res://Scripts/Controller/BattleController.gd" id="1_wvl2i"]
+[ext_resource type="Script" uid="uid://djvnewx62p2f7" path="res://Scripts/Controller/battle_controller.gd" id="1_wvl2i"]
 [ext_resource type="Script" uid="uid://bscdcyds5oxfs" path="res://Scripts/Controller/InputController.gd" id="2_1samx"]
 [ext_resource type="Script" uid="uid://dvyd2iybfjbei" path="res://Scripts/Common/State Machine/StateMachine.gd" id="2_p46lj"]
 [ext_resource type="PackedScene" uid="uid://cgl2gqeq422vd" path="res://Prefabs/Hero.tscn" id="2_u22qb"]
@@ -10,10 +10,155 @@
 [ext_resource type="Script" uid="uid://bfqsrjh8w0q7v" path="res://Scripts/Controller/Battle States/MoveTargetState.gd" id="4_u22qb"]
 [ext_resource type="Script" uid="uid://k4jgw4205jyh" path="res://Scripts/Controller/Battle States/SelectUnitState.gd" id="6_6yjxy"]
 [ext_resource type="Script" uid="uid://irbfbmi1nm6j" path="res://Scripts/Controller/Battle States/MoveSequenceState.gd" id="7_qxnh6"]
+[ext_resource type="Script" uid="uid://wvmhsujai4eb" path="res://Scripts/Controller/Battle States/cut_scene_state.gd" id="8_l0uqe"]
+[ext_resource type="Script" uid="uid://dn0g2qxjbrt17" path="res://Scripts/Controller/conversation_controller.gd" id="11_262jj"]
+[ext_resource type="Script" uid="uid://bbi63l42331ep" path="res://Scripts/View Model Component/conversation_panel.gd" id="13_tiokb"]
+[ext_resource type="Texture2D" uid="uid://ne5sxop6whch" path="res://Textures/UI/ConversationPanel.png" id="14_0qgg5"]
+[ext_resource type="Texture2D" uid="uid://t1bipmxo3gvq" path="res://Textures/UI/Avatar.png" id="15_0qgg5"]
+[ext_resource type="Texture2D" uid="uid://7bdoshek3a6o" path="res://Textures/UI/MoreConversationArrow.png" id="16_n5y6x"]
+[ext_resource type="Script" uid="uid://b5d2phj8madcp" path="res://Scripts/Common/UI/panel_anchor.gd" id="17_jr0ro"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5y6x"]
+
+[sub_resource type="Resource" id="Resource_jr0ro"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Hide Bottom"
+my_anchor = 2
+parent_anchor = 3
+offset = Vector2(0, -20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Resource" id="Resource_u5lwd"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Hide Top"
+parent_anchor = 1
+offset = Vector2(0, 20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Resource" id="Resource_dfi4p"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Show Bottom"
+my_anchor = 3
+parent_anchor = 3
+offset = Vector2(0, -20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Resource" id="Resource_yahm3"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Show Top"
+my_anchor = 1
+parent_anchor = 1
+offset = Vector2(0, 20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Animation" id="Animation_jr0ro"]
+resource_name = "Right Arrow Bounce"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(170, 210), Vector2(170, 220)]
+}
+
+[sub_resource type="Animation" id="Animation_6xsll"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(170, 210)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_imcj7"]
+_data = {
+&"RESET": SubResource("Animation_6xsll"),
+&"Right Arrow Bounce": SubResource("Animation_jr0ro")
+}
+
+[sub_resource type="Resource" id="Resource_6xsll"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Hide Bottom"
+my_anchor = 3
+parent_anchor = 2
+offset = Vector2(0, -20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Resource" id="Resource_imcj7"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Hide Top"
+my_anchor = 1
+offset = Vector2(0, 20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Resource" id="Resource_7i387"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Show Bottom"
+my_anchor = 2
+parent_anchor = 2
+offset = Vector2(0, -20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Resource" id="Resource_nttxn"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Show Top"
+offset = Vector2(0, 20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Animation" id="Animation_imcj7"]
+resource_name = "Left Arrow Bounce"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(262, 210), Vector2(262, 220)]
+}
+
+[sub_resource type="Animation" id="Animation_7i387"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(262, 210)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nttxn"]
+_data = {
+&"Left Arrow Bounce": SubResource("Animation_imcj7"),
+&"RESET": SubResource("Animation_7i387")
+}
 
 [node name="Battle" type="Node3D"]
 
-[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "inputController", "cameraController", "stateMachine", "startState")]
+[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "inputController", "cameraController", "stateMachine", "startState", "conversation_controller")]
 script = ExtResource("1_wvl2i")
 board = NodePath("Board")
 inputController = NodePath("Input Controller")
@@ -21,13 +166,14 @@ cameraController = NodePath("Camera Controller")
 stateMachine = NodePath("State Machine")
 startState = NodePath("State Machine/Init Battle State")
 heroPrefab = ExtResource("2_u22qb")
+conversation_controller = NodePath("Conversation Controller")
 
 [node name="State Machine" type="Node" parent="Battle Controller"]
 script = ExtResource("2_p46lj")
 
-[node name="Init Battle State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("selectUnitState")]
+[node name="Init Battle State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("cut_scene_state")]
 script = ExtResource("3_c5ef4")
-selectUnitState = NodePath("../Select Unit State")
+cut_scene_state = NodePath("../Cut Scene State")
 
 [node name="Move Target State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("MoveSequenceState")]
 script = ExtResource("4_u22qb")
@@ -40,6 +186,10 @@ moveTargetState = NodePath("../Move Target State")
 [node name="Move Sequence State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("SelectUnitState")]
 script = ExtResource("7_qxnh6")
 SelectUnitState = NodePath("../Select Unit State")
+
+[node name="Cut Scene State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("select_unit_state")]
+script = ExtResource("8_l0uqe")
+select_unit_state = NodePath("../Select Unit State")
 
 [node name="Input Controller" type="Node" parent="Battle Controller"]
 script = ExtResource("2_1samx")
@@ -62,3 +212,170 @@ transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 projection = 1
 size = 10.0
+
+[node name="Conversation Controller" type="Node" parent="Battle Controller" node_paths=PackedStringArray("left_panel", "right_panel")]
+script = ExtResource("11_262jj")
+left_panel = NodePath("Left Edge Conversation Panel")
+right_panel = NodePath("Right Edge Conversation Panel")
+
+[node name="Right Edge Conversation Panel" type="Panel" parent="Battle Controller/Conversation Controller" node_paths=PackedStringArray("message", "speaker", "arrow")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -465.0
+offset_bottom = 227.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_n5y6x")
+script = ExtResource("13_tiokb")
+message = NodePath("Message")
+speaker = NodePath("Speaker")
+arrow = NodePath("Right More Arrow")
+anchor_list = Array[ExtResource("17_jr0ro")]([SubResource("Resource_jr0ro"), SubResource("Resource_u5lwd"), SubResource("Resource_dfi4p"), SubResource("Resource_yahm3")])
+
+[node name="Background" type="NinePatchRect" parent="Battle Controller/Conversation Controller/Right Edge Conversation Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -465.0
+offset_top = -140.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("14_0qgg5")
+region_rect = Rect2(0, 0, 74, 140)
+patch_margin_left = 71
+patch_margin_top = 70
+patch_margin_right = 2
+patch_margin_bottom = 70
+
+[node name="Speaker" type="TextureRect" parent="Battle Controller/Conversation Controller/Right Edge Conversation Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -154.0
+offset_top = -227.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("15_0qgg5")
+
+[node name="Message" type="Label" parent="Battle Controller/Conversation Controller/Right Edge Conversation Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -420.0
+offset_top = -130.0
+offset_right = -136.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.40784314, 0.17254902, 0.08235294, 1)
+theme_override_font_sizes/font_size = 25
+text = "Here is a lot of text to read. Use the arrow for more."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Right More Arrow" type="TextureRect" parent="Battle Controller/Conversation Controller/Right Edge Conversation Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -295.0
+offset_top = -17.0
+offset_right = -262.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("16_n5y6x")
+
+[node name="Right Animation" type="AnimationPlayer" parent="Battle Controller/Conversation Controller/Right Edge Conversation Panel/Right More Arrow"]
+libraries = {
+&"": SubResource("AnimationLibrary_imcj7")
+}
+autoplay = "Right Arrow Bounce"
+
+[node name="Left Edge Conversation Panel" type="Panel" parent="Battle Controller/Conversation Controller" node_paths=PackedStringArray("message", "speaker", "arrow")]
+offset_right = 465.0
+offset_bottom = 227.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_n5y6x")
+script = ExtResource("13_tiokb")
+message = NodePath("Message")
+speaker = NodePath("Speaker")
+arrow = NodePath("Left More Arrow")
+anchor_list = Array[ExtResource("17_jr0ro")]([SubResource("Resource_6xsll"), SubResource("Resource_imcj7"), SubResource("Resource_7i387"), SubResource("Resource_nttxn")])
+
+[node name="Background" type="NinePatchRect" parent="Battle Controller/Conversation Controller/Left Edge Conversation Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -140.0
+offset_right = 465.0
+grow_vertical = 0
+scale = Vector2(-1, 1)
+pivot_offset = Vector2(232.5, 0)
+texture = ExtResource("14_0qgg5")
+region_rect = Rect2(0, 0, 74, 140)
+patch_margin_left = 71
+patch_margin_top = 70
+patch_margin_right = 2
+patch_margin_bottom = 70
+
+[node name="Speaker" type="TextureRect" parent="Battle Controller/Conversation Controller/Left Edge Conversation Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -227.0
+offset_right = 154.0
+grow_vertical = 0
+texture = ExtResource("15_0qgg5")
+flip_h = true
+
+[node name="Message" type="Label" parent="Battle Controller/Conversation Controller/Left Edge Conversation Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 136.0
+offset_top = -130.0
+offset_right = 420.0
+offset_bottom = -10.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.40784314, 0.17254902, 0.08235294, 1)
+theme_override_font_sizes/font_size = 25
+text = "Here is a lot of text to read. Use the arrow for more."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Left More Arrow" type="TextureRect" parent="Battle Controller/Conversation Controller/Left Edge Conversation Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -203.0
+offset_top = -17.0
+offset_right = -170.0
+offset_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("16_n5y6x")
+
+[node name="Left Animation" type="AnimationPlayer" parent="Battle Controller/Conversation Controller/Left Edge Conversation Panel/Left More Arrow"]
+libraries = {
+&"": SubResource("AnimationLibrary_nttxn")
+}
+autoplay = "Left Arrow Bounce"

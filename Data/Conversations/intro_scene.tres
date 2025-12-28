@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ConversationData" load_steps=8 format=3 uid="uid://cng7olutw0gde"]
+
+[ext_resource type="Script" uid="uid://cdv8vdja0xmh5" path="res://Scripts/Model/speaker_data.gd" id="1_2f4qe"]
+[ext_resource type="Script" uid="uid://bjrsq1671vlct" path="res://Scripts/Model/conversation_data.gd" id="2_brac7"]
+[ext_resource type="Texture2D" uid="uid://dxg7kewengntm" path="res://Textures/UI/evil_avatar.png" id="2_yei2b"]
+[ext_resource type="Texture2D" uid="uid://t1bipmxo3gvq" path="res://Textures/UI/Avatar.png" id="3_67htd"]
+
+[sub_resource type="Resource" id="Resource_d0pny"]
+script = ExtResource("1_2f4qe")
+speaker = ExtResource("2_yei2b")
+anchor = 1
+messages = Array[String](["Be scared. Cause I am awesome!!", "And Scary!!", "You're scared aren't you?"])
+metadata/_custom_type_script = "uid://cdv8vdja0xmh5"
+
+[sub_resource type="Resource" id="Resource_vdswj"]
+script = ExtResource("1_2f4qe")
+speaker = ExtResource("3_67htd")
+anchor = 2
+messages = Array[String](["Nope. Not really.", "Let's just get this over with."])
+metadata/_custom_type_script = "uid://cdv8vdja0xmh5"
+
+[sub_resource type="Resource" id="Resource_jn2eo"]
+script = ExtResource("1_2f4qe")
+speaker = ExtResource("2_yei2b")
+anchor = 1
+messages = Array[String](["Oh... well... hmm..."])
+metadata/_custom_type_script = "uid://cdv8vdja0xmh5"
+
+[resource]
+script = ExtResource("2_brac7")
+list = Array[ExtResource("1_2f4qe")]([SubResource("Resource_d0pny"), SubResource("Resource_vdswj"), SubResource("Resource_jn2eo")])
+metadata/_custom_type_script = "uid://bjrsq1671vlct"

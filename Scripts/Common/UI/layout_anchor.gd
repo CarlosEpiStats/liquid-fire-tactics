@@ -103,7 +103,7 @@ func move_to_anchor_position(
 
 func to_anchor_position(anchor: PanelAnchor, animated: bool):
 	if animated:
-		move_to_anchor_position(
+		await move_to_anchor_position(
 			anchor.my_anchor, 
 			anchor.parent_anchor, 
 			anchor.offset, 

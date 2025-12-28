@@ -34,14 +34,6 @@ func _ready():
 	anchor_list.append(anchor_center)
 
 
-func get_anchor(anchor_name: String):
-	for anchor in self.anchor_list:
-		if anchor.anchor_name == anchor_name:
-			return anchor
-		
-	return null
-
-
 func anchor_button(text: String):
 	var anchor = get_anchor(text)
 	
