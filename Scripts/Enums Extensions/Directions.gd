@@ -1,11 +1,12 @@
 class_name Directions
 
-enum Dirs{
+enum Dirs {
 	SOUTH,
 	EAST,
 	NORTH,
-	WEST
+	WEST,
 }
+
 
 static func GetDirection(t1: Tile, t2: Tile):
 	var dir:Directions.Dirs
@@ -16,6 +17,7 @@ static func GetDirection(t1: Tile, t2: Tile):
 		dir = Directions.Dirs.SOUTH if toTile.y < 0 else Directions.Dirs.NORTH
 	
 	return dir
+
 
 static func ToEuler(d: Dirs):
 	return Vector3(0, d * 90, 0)

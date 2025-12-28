@@ -27,7 +27,7 @@ script = ExtResource("2_p46lj")
 
 [node name="Init Battle State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("selectUnitState")]
 script = ExtResource("3_c5ef4")
-selectUnitState = NodePath(".")
+selectUnitState = NodePath("../Select Unit State")
 
 [node name="Move Target State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("MoveSequenceState")]
 script = ExtResource("4_u22qb")
