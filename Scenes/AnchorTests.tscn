@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://crpj1ls0e8p31"]
+
+[ext_resource type="Script" uid="uid://dsl6drejg7rnp" path="res://Scripts/Common/UI/layout_anchor.gd" id="1_mbloj"]
+[ext_resource type="Script" uid="uid://dgid7f61s53wv" path="res://Scripts/Test/panel_tests2.gd" id="2_rucc2"]
+[ext_resource type="Script" uid="uid://b5d2phj8madcp" path="res://Scripts/Common/UI/panel_anchor.gd" id="3_djp7t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sj1xi"]
+
+[sub_resource type="Resource" id="Resource_w2wb7"]
+script = ExtResource("3_djp7t")
+anchor_name = "Show"
+my_anchor = 2
+parent_anchor = 2
+offset = Vector2(20, -20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Resource" id="Resource_vuyvl"]
+script = ExtResource("3_djp7t")
+anchor_name = "Hide"
+my_anchor = 3
+parent_anchor = 2
+offset = Vector2(0, -20)
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[node name="AnchorTests" type="Node3D"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_right = 0.33
+anchor_bottom = 1.0
+
+[node name="ParentPanel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.4
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 75.0
+offset_right = -75.0
+offset_bottom = -75.0
+
+[node name="FullRect" type="ReferenceRect" parent="ParentPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+editor_only = false
+
+[node name="VRect" type="ReferenceRect" parent="ParentPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 3.0517578e-05
+offset_right = 3.0517578e-05
+editor_only = false
+
+[node name="HRect" type="ReferenceRect" parent="ParentPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+editor_only = false
+
+[node name="AnchorInfo" type="Label" parent="ParentPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -75.0
+text = "Placeholder Text"
+label_settings = SubResource("LabelSettings_sj1xi")
+
+[node name="ChildPanel" type="Panel" parent="ParentPanel"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = -1
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mbloj")
+
+[node name="PanelTestController" type="Node" parent="ParentPanel/ChildPanel" node_paths=PackedStringArray("child_panel", "vbox")]
+script = ExtResource("2_rucc2")
+child_panel = NodePath("..")
+vbox = NodePath("../../../VBoxContainer")
+animated = true
+anchor_list = Array[ExtResource("3_djp7t")]([SubResource("Resource_w2wb7"), SubResource("Resource_vuyvl")])
