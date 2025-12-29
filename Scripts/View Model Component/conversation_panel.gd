@@ -2,17 +2,19 @@ class_name ConversationPanel
 extends LayoutAnchor
 
 signal finished
+
 @export var message: Label
 @export var speaker: TextureRect
 @export var arrow: Node
 @export var anchor_list: Array[PanelAnchor] = []
+
 var _parent: ConversationController
 
 func _ready():
 	_parent = get_node("../")
 
 
-func get_the_anchor(anchor_name: String):
+func get_anchor(anchor_name: String):
 	for anchor in self.anchor_list:
 		if anchor.anchor_name == anchor_name:
 			return anchor

@@ -9,10 +9,10 @@ signal resumed
 var in_transition: bool
 
 func _ready() -> void:
-	left_panel.to_anchor_position(left_panel.get_the_anchor("Hide Bottom"), false)
+	left_panel.to_anchor_position(left_panel.get_anchor("Hide Bottom"), false)
 	_disable_node(left_panel)
 	
-	right_panel.to_anchor_position(right_panel.get_the_anchor("Hide Bottom"), false)
+	right_panel.to_anchor_position(right_panel.get_anchor("Hide Bottom"), false)
 	_disable_node(right_panel)
 
 func _disable_node(node: Node) -> void:
@@ -50,12 +50,12 @@ func sequence(data: ConversationData):
 			current_panel = right_panel
 		
 		if sd.anchor in [Control.PRESET_TOP_LEFT, Control.PRESET_TOP_RIGHT, Control.PRESET_CENTER_TOP]:
-			show = current_panel.get_the_anchor("Show Top")
-			hide = current_panel.get_the_anchor("Hide Top")
+			show = current_panel.get_anchor("Show Top")
+			hide = current_panel.get_anchor("Hide Top")
 		
 		else:
-			show = current_panel.get_the_anchor("Show Bottom")
-			hide = current_panel.get_the_anchor("Hide Bottom")
+			show = current_panel.get_anchor("Show Bottom")
+			hide = current_panel.get_anchor("Hide Bottom")
 		
 		# Make sure panel is hidden to start and set text to initial dialog
 		current_panel.to_anchor_position(hide, false)

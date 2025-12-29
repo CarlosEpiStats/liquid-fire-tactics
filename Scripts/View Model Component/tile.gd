@@ -1,8 +1,9 @@
 @tool # allows to change it from the editor
-extends Node
 class_name Tile
+extends Node
 
-const stepHeight: float = 0.25
+const STEP_HEIGHT := 0.25
+
 var pos: Vector2i # integer vector
 var height: int
 var content: Node
@@ -11,27 +12,27 @@ var distance: int
 
 # Convenience, get the value of the top edge, useful for placing things on top
 func center() -> Vector3:
-	return Vector3(pos.x, height * stepHeight, pos.y)
+	return Vector3(pos.x, height * STEP_HEIGHT, pos.y)
 
 # Scales to the correct height and move the tile half the height, 
 # because the pivot point is at the center of the tile
-func Match():
-	self.scale = Vector3(1, height * stepHeight, 1)
-	self.position = Vector3(pos.x, height * stepHeight / 2.0, pos.y)
+func match_tile():
+	self.scale = Vector3(1, height * STEP_HEIGHT, 1)
+	self.position = Vector3(pos.x, height * STEP_HEIGHT / 2.0, pos.y)
 
-func Grow():
+func grow():
 	height += 1
-	Match()
+	match_tile()
 
-func Shrink():
+func shrink():
 	height -= 1
-	Match()
+	match_tile()
 
 # Set a specific height and position of a tile
-func Load(p: Vector2i, h: int):
+func load_tile(p: Vector2i, h: int):
 	pos = p
 	height = h
-	Match()
+	match_tile()
 
-func LoadVector(v: Vector3):
-	Load(Vector2i(v.x, v.z), v.y)
+func load_vector(v: Vector3):
+	load_tile(Vector2i(v.x, v.z), v.y)

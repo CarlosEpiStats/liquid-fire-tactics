@@ -1,5 +1,5 @@
 class_name LayoutAnchor
-extends Panel
+extends Node
 
 func get_parent_anchor(anchor: Control.LayoutPreset) -> Vector2:
 	var ret_value := Vector2.ZERO
