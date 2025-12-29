@@ -9,21 +9,21 @@
 script = ExtResource("1_2f4qe")
 speaker = ExtResource("2_yei2b")
 anchor = 1
-messages = Array[String](["Be scared. Cause I am awesome!!", "And Scary!!", "You're scared aren't you?"])
+messages = Array[String](["VILLAIN_1A", "VILLAIN_1B", "VILLAIN_1C"])
 metadata/_custom_type_script = "uid://cdv8vdja0xmh5"
 
 [sub_resource type="Resource" id="Resource_vdswj"]
 script = ExtResource("1_2f4qe")
 speaker = ExtResource("3_67htd")
 anchor = 2
-messages = Array[String](["Nope. Not really.", "Let's just get this over with."])
+messages = Array[String](["HERO_1A", "HERO_1B"])
 metadata/_custom_type_script = "uid://cdv8vdja0xmh5"
 
 [sub_resource type="Resource" id="Resource_jn2eo"]
 script = ExtResource("1_2f4qe")
 speaker = ExtResource("2_yei2b")
 anchor = 1
-messages = Array[String](["Oh... well... hmm..."])
+messages = Array[String](["VILLAIN_2A"])
 metadata/_custom_type_script = "uid://cdv8vdja0xmh5"
 
 [resource]

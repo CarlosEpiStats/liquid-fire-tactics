@@ -14,9 +14,9 @@ func Init():
 	SpawnTestUnits()
 	
 	_owner.cameraController.setFollow(_owner.board.marker)
-	TranslationServer.set_locale("ja")
+	#TranslationServer.set_locale("ja")
 	#TranslationServer.set_locale("en")
-	#TranslationServer.set_locale("es")
+	TranslationServer.set_locale("es")
 	_owner.stateMachine.ChangeState(cut_scene_state)
 
 func SpawnTestUnits():
