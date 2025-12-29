@@ -12,7 +12,7 @@ func enter():
 
 func exit():
 	super()
-	await ability_menu_panel_controller.hide()
+	await ability_menu_panel_controller.hide_panel()
 
 
 func on_fire(e: int):

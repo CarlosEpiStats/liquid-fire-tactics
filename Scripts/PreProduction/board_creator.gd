@@ -6,7 +6,7 @@ extends Node
 @export var depth: int = 10
 @export var height: int = 8
 @export var pos: Vector2i
-@export var file_name = "defaultMap.txt"
+@export var file_name := "defaultMap.txt"
 
 var _old_pos: Vector2i
 var _random = RandomNumberGenerator.new()

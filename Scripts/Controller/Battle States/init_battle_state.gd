@@ -12,7 +12,7 @@ func init():
 	var p:Vector2i = _owner.board.tiles.keys()[0]
 	select_tile(p)
 	spawn_test_units()
-	_owner.cameraController.set_follow(_owner.board.marker)
+	_owner.camera_controller.set_follow(_owner.board.marker)
 	
 	#TranslationServer.set_locale("ja")
 	#TranslationServer.set_locale("en")
