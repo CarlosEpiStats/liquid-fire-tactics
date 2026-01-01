@@ -54,4 +54,4 @@ func did_change_notification(stat_type: StatTypes.Stat):
 		self.add_user_signal(stat_name + "_did_change")
 		_did_change_notifications[stat_name] = Signal(self, stat_name + "_did_change")
 	
-	return _did_change_notifications
+	return _did_change_notifications[stat_name]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://delq86m0lvplv"]
+[gd_scene load_steps=46 format=3 uid="uid://delq86m0lvplv"]
 
 [ext_resource type="Script" uid="uid://djvnewx62p2f7" path="res://Scripts/Controller/battle_controller.gd" id="1_wvl2i"]
 [ext_resource type="Script" uid="uid://bscdcyds5oxfs" path="res://Scripts/Controller/input_controller.gd" id="2_1samx"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://c0qskql5pwvht" path="res://Scripts/View Model Component/ability_menu_panel.gd" id="20_7i387"]
 [ext_resource type="Texture2D" uid="uid://bo5xt0awuchq4" path="res://Textures/UI/AbilityMenu.png" id="24_3quo0"]
 [ext_resource type="PackedScene" uid="uid://dqx6te27a54an" path="res://Prefabs/ability_menu_entry.tscn" id="26_mugwg"]
+[ext_resource type="Script" uid="uid://cas3gbcepe2gy" path="res://Scripts/Test/test_level_growth.gd" id="27_d13iw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5y6x"]
 
@@ -254,7 +255,6 @@ script = ExtResource("2_1samx")
 
 [node name="Board" type="Node3D" parent="Battle Controller"]
 script = ExtResource("2_vr6xi")
-file_name = null
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Battle Controller"]
 
@@ -480,3 +480,6 @@ text = "Menu Title"
 [node name="EntryVBox" type="VBoxContainer" parent="Battle Controller/Ability Menu Controller/Ability Menu Panel/PanelVBox"]
 layout_mode = 2
 theme_override_constants/separation = 5
+
+[node name="Test" type="Node" parent="."]
+script = ExtResource("27_d13iw")
