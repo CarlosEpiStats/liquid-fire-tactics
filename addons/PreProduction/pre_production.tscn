@@ -8,3 +8,5 @@
 layout_mode = 2
 text = "Parse Jobs"
 script = ExtResource("1_ejvui")
+
+[connection signal="pressed" from="ParseJobs" to="ParseJobs" method="_on_pressed"]

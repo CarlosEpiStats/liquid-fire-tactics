@@ -1,8 +1,8 @@
 class_name StatModifierFeature
 extends Feature
 
-var type: StatTypes.Stat
-var amount: int
+@export var type: StatTypes.Stat
+@export var amount: int
 var stats: Stats:
 	get: 
 		return _target.get_node("Stats")
