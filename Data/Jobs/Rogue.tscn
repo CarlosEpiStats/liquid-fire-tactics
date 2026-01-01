@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://c161lfi7cm8om"]
+[gd_scene load_steps=3 format=3 uid="uid://c161lfi7cm8om"]
 
 [ext_resource type="Script" uid="uid://dbnjrlu2we0bm" path="res://Scripts/View Model Component/Actor/job.gd" id="1_rno7l"]
+[ext_resource type="Script" uid="uid://btux3n3s2kg2b" path="res://Scripts/View Model Component/Features/stat_modifier_feature.gd" id="2_5hl4i"]
 
 [node name="Job" type="Node"]
 script = ExtResource("1_rno7l")
-base_stats = Array[int]([0, 0, 0, 0, 0, 0, 0])
+base_stats = Array[int]([32, 13, 51, 67, 51, 67, 110])
 grow_stats = Array[float]([7.6, 1.1, 5.6, 8.8, 5.6, 8.8, 1.8])
+
+[node name="SMF_MOV" type="Node" parent="."]
+script = ExtResource("2_5hl4i")
+type = 13
+amount = 5
+
+[node name="SMF_JMP" type="Node" parent="."]
+script = ExtResource("2_5hl4i")
+type = 14
+amount = 3
