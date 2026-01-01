@@ -1,14 +1,22 @@
 class_name Movement
 extends Node
 
-var range: int
-var jump_height: int
+var range: int:
+	get:
+		return stats.get_stat(StatTypes.Stat.MOV)
+
+var jump_height: int:
+	get:
+		return stats.get_stat(StatTypes.Stat.JMP)
+
+var stats: Stats
 var unit: Unit
 var jumper: Node3D
 
 func _init():
 	unit = get_node("../")
 	jumper = get_node("../Jumper")
+	stats = get_node("../Stats")
 
 func get_tiles_in_range(board: BoardCreator):
 	var ret_value = board.search(unit.tile, expand_search)
