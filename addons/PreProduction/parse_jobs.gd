@@ -7,8 +7,9 @@ func _on_pressed():
 	var error = DirAccess.make_dir_recursive_absolute(path)
 	if error != 0:
 		print("Error creating directory. Error Code: " + str(error))
-		parse_starting_stats(get_data("res://Settings/job_starting_stats.csv"))
-		parse_growth_stats(get_data("res://Settings/job_growth_stats.csv"))
+	
+	parse_starting_stats(get_data("res://Settings/job_starting_stats.csv"))
+	parse_growth_stats(get_data("res://Settings/job_growth_stats.csv"))
 		
 
 func get_data(path: String):
