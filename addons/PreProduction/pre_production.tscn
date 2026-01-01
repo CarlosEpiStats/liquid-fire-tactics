@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhy66lill5l60"]
+
+[ext_resource type="Script" uid="uid://bmiajqpmb35mr" path="res://addons/PreProduction/parse_jobs.gd" id="1_ejvui"]
+
+[node name="PreProduction" type="VBoxContainer"]
+
+[node name="ParseJobs" type="Button" parent="."]
+layout_mode = 2
+text = "Parse Jobs"
+script = ExtResource("1_ejvui")
