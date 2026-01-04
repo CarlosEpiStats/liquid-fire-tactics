@@ -5,6 +5,7 @@ extends BattleState
 func on_move(e: Vector2i):
 	var rotated_point = _owner.camera_controller.adjusted_movement(e)
 	select_tile(rotated_point + _owner.board.pos)
+	refresh_primary_stat_panel(_owner.board.pos)
 
 
 func on_fire(e: int):
@@ -19,3 +20,13 @@ func zoom(scroll: int):
 
 func orbit(direction: Vector2):
 	_owner.camera_controller.orbit(direction)
+
+
+func enter():
+	super()
+	refresh_primary_stat_panel(_owner.board.pos)
+
+
+func exit():
+	super()
+	await stat_panel_controller.hide_primary()

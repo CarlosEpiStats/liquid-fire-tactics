@@ -14,6 +14,10 @@ var units: Array[Unit]:
 	get:
 		return _owner.units
 
+var stat_panel_controller: StatPanelController:
+	get:
+		return _owner.stat_panel_controller
+
 func _ready():
 	_owner = get_node("../../")
 
@@ -53,3 +57,29 @@ func zoom(scroll: int):
 
 func orbit(direction: Vector2):
 	pass
+	
+
+func get_unit(p: Vector2i):
+	var t: Tile = _owner.board.get_tile(p)
+	if t == null or t.content == null:
+		return null
+	
+	return t.content
+
+
+func refresh_primary_stat_panel(p: Vector2i):
+	var target: Unit = get_unit(p)
+	if target != null:
+		stat_panel_controller.show_primary(target)
+	
+	else: 
+		stat_panel_controller.hide_primary()
+
+
+func refresh_secondary_stat_panel(p: Vector2i):
+	var target: Unit = get_unit(p)
+	if target != null:
+		stat_panel_controller.show_secondary(target)
+	
+	else:
+		stat_panel_controller.hide_secondary()

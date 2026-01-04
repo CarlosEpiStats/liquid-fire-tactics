@@ -38,3 +38,13 @@ func attack():
 func set_category(index: int):
 	action_selection_state.category = index
 	_owner.state_machine.change_state(action_selection_state)
+
+
+func enter():
+	super()
+	stat_panel_controller.show_primary(turn.actor)
+
+
+func exit():
+	super()
+	await stat_panel_controller.hide_primary()

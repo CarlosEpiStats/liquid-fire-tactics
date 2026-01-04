@@ -10,15 +10,18 @@ func enter():
 	var mover: Movement = turn.actor.get_node("Movement")
 	tiles = mover.get_tiles_in_range(_owner.board)
 	_owner.board.select_tiles(tiles)
+	refresh_primary_stat_panel(_owner.board.pos)
 
 func exit():
 	super()
 	_owner.board.deselect_tiles(tiles)
 	tiles = null
+	await stat_panel_controller.hide_primary()
 
 func on_move(e: Vector2i):
 	var rotated_point = _owner.camera_controller.adjusted_movement(e)
 	select_tile(rotated_point + _owner.board.pos)
+	refresh_primary_stat_panel(_owner.board.pos)
 
 func on_fire(e: int):
 	if e == 0:

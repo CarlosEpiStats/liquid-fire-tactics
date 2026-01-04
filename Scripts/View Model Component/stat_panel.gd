@@ -21,7 +21,7 @@ func get_anchor(anchor_name: String):
 		if anchor.anchor_name == anchor_name:
 			return anchor
 		
-		return null
+	return null
 
 
 func display(obj: Node):

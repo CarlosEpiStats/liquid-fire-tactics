@@ -35,3 +35,13 @@ func cancel():
 	
 	else:
 		_owner.state_machine.change_state(explore_state)
+
+
+func enter():
+	super()
+	stat_panel_controller.show_primary(turn.actor)
+
+
+func exit():
+	super()
+	await stat_panel_controller.hide_primary()

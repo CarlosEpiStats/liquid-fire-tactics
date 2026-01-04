@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://delq86m0lvplv"]
+[gd_scene load_steps=56 format=3 uid="uid://delq86m0lvplv"]
 
 [ext_resource type="Script" uid="uid://djvnewx62p2f7" path="res://Scripts/Controller/battle_controller.gd" id="1_wvl2i"]
 [ext_resource type="Script" uid="uid://bscdcyds5oxfs" path="res://Scripts/Controller/input_controller.gd" id="2_1samx"]
@@ -26,6 +26,10 @@
 [ext_resource type="Script" uid="uid://c0qskql5pwvht" path="res://Scripts/View Model Component/ability_menu_panel.gd" id="20_7i387"]
 [ext_resource type="Texture2D" uid="uid://bo5xt0awuchq4" path="res://Textures/UI/AbilityMenu.png" id="24_3quo0"]
 [ext_resource type="PackedScene" uid="uid://dqx6te27a54an" path="res://Prefabs/ability_menu_entry.tscn" id="26_mugwg"]
+[ext_resource type="Script" uid="uid://w5w10k5146t8" path="res://Scripts/Controller/stat_panel_controller.gd" id="27_d5dbc"]
+[ext_resource type="Script" uid="uid://dyq3nmjq61l0u" path="res://Scripts/View Model Component/stat_panel.gd" id="28_hoytp"]
+[ext_resource type="Texture2D" uid="uid://ydoypqlqfu76" path="res://Textures/UI/BlueAttackPanel.png" id="29_ybx13"]
+[ext_resource type="Texture2D" uid="uid://bfi4ysqas5dk3" path="res://Textures/UI/RedAttackPanel.png" id="30_xtlnh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5y6x"]
 
@@ -191,9 +195,58 @@ my_anchor = 3
 parent_anchor = 3
 metadata/_custom_type_script = "uid://b5d2phj8madcp"
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mugwg"]
+
+[sub_resource type="Resource" id="Resource_hibfo"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Hide"
+my_anchor = 3
+parent_anchor = 2
+offset = Vector2(0, -20)
+trans = 4
+anchor_ease = 1
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Resource" id="Resource_hjq1m"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Show"
+my_anchor = 2
+parent_anchor = 2
+offset = Vector2(0, -20)
+trans = 4
+anchor_ease = 1
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="LabelSettings" id="LabelSettings_0gu8g"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.5019608)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d13iw"]
+
+[sub_resource type="Resource" id="Resource_gigvg"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Hide"
+my_anchor = 2
+parent_anchor = 3
+offset = Vector2(0, -20)
+trans = 4
+anchor_ease = 1
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
+[sub_resource type="Resource" id="Resource_hqpwi"]
+script = ExtResource("17_jr0ro")
+anchor_name = "Show"
+my_anchor = 3
+parent_anchor = 3
+offset = Vector2(0, -20)
+trans = 4
+anchor_ease = 1
+metadata/_custom_type_script = "uid://b5d2phj8madcp"
+
 [node name="Battle" type="Node3D"]
 
-[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "input_controller", "camera_controller", "state_machine", "start_state", "conversation_controller", "ability_menu_panel_controller")]
+[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "input_controller", "camera_controller", "state_machine", "start_state", "conversation_controller", "ability_menu_panel_controller", "stat_panel_controller")]
 script = ExtResource("1_wvl2i")
 board = NodePath("Board")
 input_controller = NodePath("Input Controller")
@@ -203,6 +256,7 @@ start_state = NodePath("State Machine/Init Battle State")
 hero_prefab = ExtResource("2_u22qb")
 conversation_controller = NodePath("Conversation Controller")
 ability_menu_panel_controller = NodePath("Ability Menu Controller")
+stat_panel_controller = NodePath("StatPanelController")
 
 [node name="State Machine" type="Node" parent="Battle Controller"]
 script = ExtResource("2_p46lj")
@@ -479,5 +533,229 @@ text = "Menu Title"
 [node name="EntryVBox" type="VBoxContainer" parent="Battle Controller/Ability Menu Controller/Ability Menu Panel/PanelVBox"]
 layout_mode = 2
 theme_override_constants/separation = 5
+
+[node name="StatPanelController" type="Node" parent="Battle Controller" node_paths=PackedStringArray("primary_panel", "secondary_panel")]
+script = ExtResource("27_d5dbc")
+primary_panel = NodePath("PrimaryStatPanel")
+secondary_panel = NodePath("SecondaryStatPanel")
+
+[node name="PrimaryStatPanel" type="Panel" parent="Battle Controller/StatPanelController" node_paths=PackedStringArray("background", "avatar", "hp_label", "name_label", "mp_label", "lvl_label")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -247.0
+offset_right = 320.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mugwg")
+script = ExtResource("28_hoytp")
+ally_background = ExtResource("29_ybx13")
+enemy_background = ExtResource("30_xtlnh")
+background = NodePath("BackgroundFrame")
+avatar = NodePath("Avatar")
+hp_label = NodePath("HPLabel")
+name_label = NodePath("NameLabel")
+mp_label = NodePath("MPLabel")
+lvl_label = NodePath("LevelLabel")
+anchor_list = Array[ExtResource("17_jr0ro")]([SubResource("Resource_hibfo"), SubResource("Resource_hjq1m")])
+
+[node name="BackgroundFrame" type="NinePatchRect" parent="Battle Controller/StatPanelController/PrimaryStatPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 320.0
+grow_vertical = 0
+texture = ExtResource("29_ybx13")
+region_rect = Rect2(0, 0, 50, 116)
+patch_margin_left = 3
+patch_margin_right = 47
+
+[node name="Avatar" type="TextureRect" parent="Battle Controller/StatPanelController/PrimaryStatPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -227.0
+offset_right = 154.0
+grow_vertical = 0
+texture = ExtResource("15_0qgg5")
+flip_h = true
+
+[node name="NameLabel" type="Label" parent="Battle Controller/StatPanelController/PrimaryStatPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -93.0
+offset_right = 300.0
+offset_bottom = -62.0
+grow_vertical = 0
+text = "Arthur"
+label_settings = SubResource("LabelSettings_0gu8g")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HPLabel" type="Label" parent="Battle Controller/StatPanelController/PrimaryStatPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -63.0
+offset_right = 290.0
+offset_bottom = -32.0
+grow_vertical = 0
+text = "HP 83/90"
+label_settings = SubResource("LabelSettings_0gu8g")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MPLabel" type="Label" parent="Battle Controller/StatPanelController/PrimaryStatPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+offset_right = 280.0
+offset_bottom = -2.0
+grow_vertical = 0
+text = "MP 20/25"
+label_settings = SubResource("LabelSettings_0gu8g")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="Battle Controller/StatPanelController/PrimaryStatPanel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -33.0
+offset_right = 132.0
+offset_bottom = -2.0
+grow_vertical = 0
+text = "LV. 9"
+label_settings = SubResource("LabelSettings_0gu8g")
+vertical_alignment = 1
+
+[node name="SecondaryStatPanel" type="Panel" parent="Battle Controller/StatPanelController" node_paths=PackedStringArray("background", "avatar", "hp_label", "name_label", "mp_label", "lvl_label")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -247.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d13iw")
+script = ExtResource("28_hoytp")
+ally_background = ExtResource("29_ybx13")
+enemy_background = ExtResource("30_xtlnh")
+background = NodePath("BackgroundFrame")
+avatar = NodePath("Avatar")
+hp_label = NodePath("HPLabel")
+name_label = NodePath("NameLabel")
+mp_label = NodePath("MPLabel")
+lvl_label = NodePath("LevelLabel")
+anchor_list = Array[ExtResource("17_jr0ro")]([SubResource("Resource_gigvg"), SubResource("Resource_hqpwi")])
+
+[node name="BackgroundFrame" type="NinePatchRect" parent="Battle Controller/StatPanelController/SecondaryStatPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(-1, -1)
+pivot_offset = Vector2(160, 50)
+texture = ExtResource("29_ybx13")
+region_rect = Rect2(0, 0, 50, 116)
+patch_margin_left = 3
+patch_margin_right = 47
+
+[node name="Avatar" type="TextureRect" parent="Battle Controller/StatPanelController/SecondaryStatPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -154.0
+offset_top = -227.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("15_0qgg5")
+
+[node name="NameLabel" type="Label" parent="Battle Controller/StatPanelController/SecondaryStatPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -93.0
+offset_bottom = -62.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Mordred"
+label_settings = SubResource("LabelSettings_0gu8g")
+vertical_alignment = 1
+
+[node name="HPLabel" type="Label" parent="Battle Controller/StatPanelController/SecondaryStatPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -290.0
+offset_top = -63.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "HP 72/80"
+label_settings = SubResource("LabelSettings_0gu8g")
+vertical_alignment = 1
+
+[node name="MPLabel" type="Label" parent="Battle Controller/StatPanelController/SecondaryStatPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -33.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "MP 23/31"
+label_settings = SubResource("LabelSettings_0gu8g")
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="Battle Controller/StatPanelController/SecondaryStatPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -33.0
+offset_right = -20.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "LV. 5"
+label_settings = SubResource("LabelSettings_0gu8g")
+horizontal_alignment = 2
 
 [node name="Test" type="Node" parent="."]
