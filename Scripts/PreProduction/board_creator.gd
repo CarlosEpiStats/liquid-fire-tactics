@@ -10,6 +10,9 @@ extends Node
 
 var _old_pos: Vector2i
 var _random = RandomNumberGenerator.new()
+var _min := Vector2i(999_999, 999_999)
+var _max := Vector2i(-999_999, -999_999)
+
 var tiles = {}
 var tile_view_prefab = preload("res://Prefabs/Tile.tscn")
 var tile_selection_indicator_prefab = preload("res://Prefabs/Tile Selection Indicator.tscn")
@@ -17,6 +20,14 @@ var marker
 var save_path = "res://Data/Levels/"
 var selected_tile_color := Color(0, 1, 1, 1)
 var default_tile_color := Color(1, 1, 1, 1)
+
+var min: Vector2i:
+	get:
+		return _min
+
+var max: Vector2i:
+	get:
+		return _max
 
 func _ready() -> void:
 	marker = tile_selection_indicator_prefab.instantiate()
@@ -42,6 +53,9 @@ func clear():
 	for key in tiles:
 		tiles[key].free()
 	tiles.clear()
+	_min = Vector2i(999_999, 999_999)
+	_max = Vector2i(-999_999, -999_999)
+	
 
 func grow():
 	_grow_single(pos)
@@ -168,6 +182,11 @@ func load_map(save_file):
 		var t: Tile = _create()
 		t.load_tile(Vector2i(save_x, save_z) , save_height)
 		tiles[Vector2i(t.pos.x,t.pos.y)] = t
+		
+		_min.x = min(_min.x, t.pos.x)
+		_min.y = min(_min.y, t.pos.y)
+		_max.x = max(_max.x, t.pos.x)
+		_max.y = max(_max.y, t.pos.y)
 	
 	save_game.close()
 	_update_marker()
@@ -214,6 +233,11 @@ func load_map_json(save_file):
 		var t: Tile = _create()
 		t.load_tile(Vector2(mtile["pos_x"], mtile["pos_z"]) , mtile["height"])
 		tiles[Vector2i(t.pos.x,t.pos.y)] = t
+		
+		_min.x = min(_min.x, t.pos.x)
+		_min.y = min(_min.y, t.pos.y)
+		_max.x = max(_max.x, t.pos.x)
+		_max.y = max(_max.y, t.pos.y)
 	
 	save_game.close()
 	_update_marker()
@@ -268,8 +292,9 @@ func range_search(start: Tile, add_tile: Callable, range: int):
 			if next == null:
 				continue
 				
-			if next == start:
-				ret_value.append(start)
+			if next == start: # Not sure if this should be deleted
+				if add_tile.call(start, start):
+					ret_value.append(start)
 			
 			elif add_tile.call(start, next):
 				next.distance = (abs(x) + abs(y))

@@ -18,6 +18,14 @@ var stat_panel_controller: StatPanelController:
 	get:
 		return _owner.stat_panel_controller
 
+var pos: Vector2i:
+	get:
+		return _owner.board.pos
+
+var board: BoardCreator:
+	get:
+		return _owner.board
+
 func _ready():
 	_owner = get_node("../../")
 
