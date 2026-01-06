@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://delq86m0lvplv"]
+[gd_scene load_steps=57 format=3 uid="uid://delq86m0lvplv"]
 
 [ext_resource type="Script" uid="uid://djvnewx62p2f7" path="res://Scripts/Controller/battle_controller.gd" id="1_wvl2i"]
 [ext_resource type="Script" uid="uid://bscdcyds5oxfs" path="res://Scripts/Controller/input_controller.gd" id="2_1samx"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://dn0g2qxjbrt17" path="res://Scripts/Controller/conversation_controller.gd" id="11_262jj"]
 [ext_resource type="Script" uid="uid://cqmgaarj87h47" path="res://Scripts/Controller/Battle States/category_selection_state.gd" id="11_d13iw"]
 [ext_resource type="Script" uid="uid://brfpyx54v7f4i" path="res://Scripts/Controller/Battle States/explore_state.gd" id="12_4nbmx"]
+[ext_resource type="Script" uid="uid://c3bdy25yn8p8b" path="res://Scripts/Controller/Battle States/ability_target_state.gd" id="13_hoytp"]
 [ext_resource type="Script" uid="uid://bbi63l42331ep" path="res://Scripts/View Model Component/conversation_panel.gd" id="13_tiokb"]
 [ext_resource type="Texture2D" uid="uid://ne5sxop6whch" path="res://Textures/UI/ConversationPanel.png" id="14_0qgg5"]
 [ext_resource type="Texture2D" uid="uid://t1bipmxo3gvq" path="res://Textures/UI/Avatar.png" id="15_0qgg5"]
@@ -294,14 +295,20 @@ category_selection_state = NodePath("../CategorySelectionState")
 select_unit_state = NodePath("../Select Unit State")
 explore_state = NodePath("../ExploreState")
 
-[node name="CategorySelectionState" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("command_selection_state", "action_selection_state")]
+[node name="CategorySelectionState" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("command_selection_state", "action_selection_state", "ability_target_state")]
 script = ExtResource("11_d13iw")
 command_selection_state = NodePath("../CommandSelectionState")
 action_selection_state = NodePath("../ActionSelectionState")
+ability_target_state = NodePath("../AbilityTargetState")
 
 [node name="ExploreState" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("command_selection_state")]
 script = ExtResource("12_4nbmx")
 command_selection_state = NodePath("../CommandSelectionState")
+
+[node name="AbilityTargetState" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("command_selection_state", "category_selection_state")]
+script = ExtResource("13_hoytp")
+command_selection_state = NodePath("../CommandSelectionState")
+category_selection_state = NodePath("../CategorySelectionState")
 
 [node name="Input Controller" type="Node" parent="Battle Controller"]
 script = ExtResource("2_1samx")

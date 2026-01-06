@@ -2,6 +2,7 @@ extends BaseAbilityMenuState
 
 @export var command_selection_state: State
 @export var action_selection_state: State
+@export var ability_target_state: State
 
 func load_menu():
 	if menu_options.size() == 0:
@@ -27,12 +28,12 @@ func cancel():
 	_owner.state_machine.change_state(command_selection_state)
 
 
+# we get the first child of Abilites, the Attack node, 
+# and change state to Ability Target State
 func attack():
-	turn.has_unit_acted = true
-	if turn.has_unit_moved:
-		turn.lock_move = true
-	
-	_owner.state_machine.change_state(command_selection_state)
+	var abilities: Array[Node] = turn.actor.get_node("Abilities").get_children()
+	turn.ability = abilities[0]
+	_owner.state_machine.change_state(ability_target_state)
 
 
 func set_category(index: int):
