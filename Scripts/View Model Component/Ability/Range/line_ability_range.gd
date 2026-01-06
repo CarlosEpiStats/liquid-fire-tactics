@@ -30,3 +30,4 @@ func get_tiles_in_range(board: BoardCreator):
 
 func valid_tile(t: Tile):
 	return t != null and abs(t.height - unit.tile.height) <= vertical
+	

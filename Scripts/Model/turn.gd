@@ -7,6 +7,7 @@ var has_unit_acted: bool
 var lock_move: bool
 var start_tile: Tile
 var start_dir: Directions.Dirs
+var ability: Node
 
 func change(current: Unit):
 	actor = current
