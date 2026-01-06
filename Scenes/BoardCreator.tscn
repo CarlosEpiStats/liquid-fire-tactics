@@ -5,3 +5,4 @@
 [node name="BoardCreator" type="Node3D"]
 script = ExtResource("1_5yni6")
 height = 9
+pos = Vector2i(4, 7)

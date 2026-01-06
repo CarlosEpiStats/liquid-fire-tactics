@@ -4,6 +4,7 @@ extends BaseAbilityMenuState
 @export var category_selection_state: State
 @export var select_unit_state: State
 @export var explore_state: State
+@export var end_facing_state: State
 
 func load_menu():
 	if menu_options.size() == 0:
@@ -24,7 +25,7 @@ func confirm():
 		1:
 			_owner.state_machine.change_state(category_selection_state)
 		2:
-			_owner.state_machine.change_state(select_unit_state)
+			_owner.state_machine.change_state(end_facing_state)
 
 
 func cancel():

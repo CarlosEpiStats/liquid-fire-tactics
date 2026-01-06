@@ -1,6 +1,6 @@
 extends BattleState
 
-@export var command_selection_state: State
+@export var confirm_ability_target_state: State
 @export var category_selection_state: State
 
 var tiles = []
@@ -39,11 +39,8 @@ func on_move(e: Vector2i):
 
 func on_fire(e: int):
 	if e == 0:
-		turn.has_unit_acted = true
-		if turn.has_unit_moved:
-			turn.lock_move = true
-		
-		_owner.state_machine.change_state(command_selection_state)
+		if ar.direction_oriented or tiles.has(board.get_tile(pos)):
+			_owner.state_machine.change_state(confirm_ability_target_state)
 	
 	else:
 		_owner.state_machine.change_state(category_selection_state)

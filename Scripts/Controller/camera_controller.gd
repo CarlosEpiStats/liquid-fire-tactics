@@ -43,16 +43,16 @@ func orbit(direction: Vector2):
 func adjusted_movement(original_point: Vector2i):
 	var angle = rad_to_deg($Heading.rotation.y)
 
-	if (angle >= -45 and angle < 45) or (angle < -315 or angle >= 315):
+	if (angle > -45 and angle <= 45) or (angle <= -315 or angle > 315):
 		return original_point
 		
-	elif (angle >= 45 and angle < 135) or (angle >= -315 and angle < -225):
+	elif (angle > 45 and angle <= 135) or (angle > -315 and angle <= -225):
 		return Vector2i(original_point.y, original_point.x * -1)
 		
-	elif (angle >= 135 and angle < 225) or (angle >= -225 and angle < -135):
+	elif (angle > 135 and angle <= 225) or (angle > -225 and angle <= -135):
 		return Vector2i(original_point.x * -1, original_point.y * -1)
 
-	elif (angle >= 225 and angle < 315) or (angle >= -135 and angle < -45):
+	elif (angle > 225 and angle <= 315) or (angle > -135 and angle <= -45):
 		return Vector2i(original_point.y * -1, original_point.x)
 
 	else:
