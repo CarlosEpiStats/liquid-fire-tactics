@@ -17,4 +17,5 @@ enum Stat {
 	MOV, # Move Range
 	JMP, # Jump Height
 	COUNT,
+	CTR, # Counter for turn order
 }
