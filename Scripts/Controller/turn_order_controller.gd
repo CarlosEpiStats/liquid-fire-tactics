@@ -1,16 +1,18 @@
 class_name TurnOrderController
 extends Node
 
+signal round_began()
+signal turn_checked(sender: Unit, exc: BaseException)
+signal turn_completed(unit: Unit)
+signal round_ended()
+signal round_resumed()
+
 const TURN_ACTIVATION: int = 1000 # minimum value the CTR needs to hit
 const TURN_COST: int = 500 # minimum CTR spent once a turn is finished
 const MOVE_COST: int = 300 # additonal CTR down if a unit moves
 const ACTION_COST: int = 200 # additional CTR down if a unit takes an action
 
-signal round_began()
-signal turn_checked(exc: BaseException)
-signal turn_completed(unit: Unit)
-signal round_ended()
-signal round_resumed()
+var _turn_began = {}
 
 func _ready() -> void:
 	turn_round()
@@ -34,6 +36,7 @@ func turn_round():
 		for unit in units:
 			if can_take_turn(unit):
 				bc.turn.change(unit)
+				turn_began(unit).emit()
 				await round_resumed
 				var cost: int = TURN_COST
 				if bc.turn.has_unit_moved:
@@ -51,10 +54,21 @@ func turn_round():
 
 func can_take_turn(target: Unit):
 	var exc := BaseException.new(get_counter(target) >= TURN_ACTIVATION)
-	turn_checked.emit(exc)
+	turn_checked.emit(target, exc)
 	return exc.toggle
 
 
 func get_counter(target: Unit):
 	var s: Stats = target.get_node("Stats")
 	return s.get_stat(StatTypes.Stat.CTR)
+
+
+func turn_began(unit: Unit):
+	var unit_name = unit.name
+	if not _turn_began.has(unit_name):
+		self.add_user_signal(unit_name + "_turn_began")
+		_turn_began[unit_name] = Signal(self, unit_name + "_turn_began")
+		
+	return _turn_began[unit_name]
+	
+	
