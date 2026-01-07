@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://delq86m0lvplv"]
+[gd_scene load_steps=61 format=3 uid="uid://delq86m0lvplv"]
 
 [ext_resource type="Script" uid="uid://djvnewx62p2f7" path="res://Scripts/Controller/battle_controller.gd" id="1_wvl2i"]
 [ext_resource type="Script" uid="uid://bscdcyds5oxfs" path="res://Scripts/Controller/input_controller.gd" id="2_1samx"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" uid="uid://dyq3nmjq61l0u" path="res://Scripts/View Model Component/stat_panel.gd" id="28_hoytp"]
 [ext_resource type="Texture2D" uid="uid://ydoypqlqfu76" path="res://Textures/UI/BlueAttackPanel.png" id="29_ybx13"]
 [ext_resource type="Texture2D" uid="uid://bfi4ysqas5dk3" path="res://Textures/UI/RedAttackPanel.png" id="30_xtlnh"]
+[ext_resource type="Script" uid="uid://doxy3kn1q51gm" path="res://Scripts/Controller/turn_order_controller.gd" id="35_hjq1m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n5y6x"]
 
@@ -250,7 +251,7 @@ metadata/_custom_type_script = "uid://b5d2phj8madcp"
 
 [node name="Battle" type="Node3D"]
 
-[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "input_controller", "camera_controller", "state_machine", "start_state", "conversation_controller", "ability_menu_panel_controller", "stat_panel_controller")]
+[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "input_controller", "camera_controller", "state_machine", "start_state", "conversation_controller", "ability_menu_panel_controller", "stat_panel_controller", "turn_order_controller")]
 script = ExtResource("1_wvl2i")
 board = NodePath("Board")
 input_controller = NodePath("Input Controller")
@@ -261,6 +262,7 @@ hero_prefab = ExtResource("2_u22qb")
 conversation_controller = NodePath("Conversation Controller")
 ability_menu_panel_controller = NodePath("Ability Menu Controller")
 stat_panel_controller = NodePath("StatPanelController")
+turn_order_controller = NodePath("TurnOrderController")
 
 [node name="State Machine" type="Node" parent="Battle Controller"]
 script = ExtResource("2_p46lj")
@@ -783,5 +785,8 @@ grow_vertical = 0
 text = "LV. 5"
 label_settings = SubResource("LabelSettings_0gu8g")
 horizontal_alignment = 2
+
+[node name="TurnOrderController" type="Node" parent="Battle Controller"]
+script = ExtResource("35_hjq1m")
 
 [node name="Test" type="Node" parent="."]

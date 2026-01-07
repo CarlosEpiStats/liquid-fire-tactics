@@ -1,7 +1,6 @@
 extends BattleState
 
 @export var command_selection_state: State
-var index: int = -1
 
 func enter():
 	super()
@@ -9,6 +8,6 @@ func enter():
 
 
 func change_current_unit():
-	index = (index + 1) % units.size()
-	turn.change(units[index])
+	turn_controller.round_resumed.emit()
+	select_tile(turn.actor.tile.pos)
 	_owner.state_machine.change_state(command_selection_state)

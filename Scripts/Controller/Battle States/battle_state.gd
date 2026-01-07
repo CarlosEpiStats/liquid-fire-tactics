@@ -26,6 +26,10 @@ var board: BoardCreator:
 	get:
 		return _owner.board
 
+var turn_controller: TurnOrderController:
+	get:
+		return _owner.turn_order_controller
+
 func _ready():
 	_owner = get_node("../../")
 
