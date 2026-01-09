@@ -15,7 +15,9 @@ func enter():
 	board.select_tiles(tiles)
 	find_targets()
 	refresh_primary_stat_panel(turn.actor.tile.pos)
-	set_target(0)
+	if turn.targets.size() > 0:
+		await hit_success_indicator.show_panel()
+		set_target(0)
 
 
 func exit():
@@ -23,6 +25,7 @@ func exit():
 	board.deselect_tiles(tiles)
 	await stat_panel_controller.hide_primary()
 	await stat_panel_controller.hide_secondary()
+	await hit_success_indicator.hide_panel()
 
 
 func on_move(e: Vector2i):
@@ -73,6 +76,26 @@ func set_target(target: int):
 	
 	if turn.targets.size() > 0:
 		refresh_secondary_stat_panel(turn.targets[index].pos)
+		update_hit_success_indicator()
+
+
+func update_hit_success_indicator():
+	var chance: int = calculate_hit_rate()
+	var amount: int = estimate_damage()
+	hit_success_indicator.set_stats(chance, amount)
+
+func calculate_hit_rate():
+	var target = turn.targets[index].content
+	var children: Array[Node] = turn.ability.find_children("*", "HitRate", false)
+	if children:
+		var hr: HitRate = children[0]
+		return hr.calculate(turn.actor, target)
+	
+	print("Couldn't find Hit Rate")
+	return 0
+
+func estimate_damage() -> int:
+	return 50
 
 
 func zoom(scroll: int):

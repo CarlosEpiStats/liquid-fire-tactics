@@ -21,10 +21,13 @@ func on_turn_check(target: Unit, exc: BaseException):
 			add(target, "Slow", SlowStatusEffect, 15)
 		
 		2:
-			add(target, "Stop", StopStatusEffect, 15)
+			add(target, "Stop", StopStatusEffect, 150)
 		
 		3:
 			add(target, "Haste", HasteStatusEffect, 15)
+		
+		4:
+			add(target, "Blind", BlindStatusEffect, 500)
 		
 		_:
 			unequip_cursed_item(target)

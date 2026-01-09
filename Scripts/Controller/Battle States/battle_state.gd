@@ -30,6 +30,10 @@ var turn_controller: TurnOrderController:
 	get:
 		return _owner.turn_order_controller
 
+var hit_success_indicator: HitSuccessIndicator:
+	get:
+		return _owner.hit_success_indicator
+
 func _ready():
 	_owner = get_node("../../")
 

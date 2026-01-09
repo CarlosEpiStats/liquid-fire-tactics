@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddplovr00s3xb"]
+
+[ext_resource type="Script" uid="uid://dbnjrlu2we0bm" path="res://Scripts/View Model Component/Actor/job.gd" id="1_62tvm"]
+
+[node name="Job" type="Node"]
+script = ExtResource("1_62tvm")
+base_stats = Array[int]([0, 0, 0, 0, 0, 0, 0])
+grow_stats = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])

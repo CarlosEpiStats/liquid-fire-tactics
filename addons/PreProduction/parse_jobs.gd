@@ -34,12 +34,20 @@ func parse_starting_stats(data):
 		for i in job.STAT_ORDER.size():
 			job.base_stats[i] = int(elements[i + 1])
 		
+		var evade: StatModifierFeature = get_feature(job, StatTypes.Stat.EVD)
+		evade.amount = int(elements[8])
+		evade.name = "SMF_EVD"
+		
+		var res: StatModifierFeature = get_feature(job, StatTypes.Stat.RES)
+		res.amount = int(elements[9])
+		res.name = "SMF_RES"
+		
 		var move: StatModifierFeature = get_feature(job, StatTypes.Stat.MOV)
-		move.amount = int(elements[8])
+		move.amount = int(elements[10])
 		move.name = "SMF_MOV"
 		
 		var jump: StatModifierFeature = get_feature(job, StatTypes.Stat.JMP)
-		jump.amount = int(elements[9])
+		jump.amount = int(elements[11])
 		jump.name = "SMF_JMP"
 		
 		scene.pack(job)
