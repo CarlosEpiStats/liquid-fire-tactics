@@ -4,6 +4,8 @@ extends Node
 signal automatic_hit_checked
 signal automatic_miss_checked
 signal status_checked
+signal missed
+signal hit
 
 @export var anchor_list: Array[PanelAnchor] = []
 @export var panel: LayoutAnchor

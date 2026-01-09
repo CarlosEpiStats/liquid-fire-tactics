@@ -85,11 +85,11 @@ func update_hit_success_indicator():
 	hit_success_indicator.set_stats(chance, amount)
 
 func calculate_hit_rate():
-	var target = turn.targets[index].content
+	var target = turn.targets[index]
 	var children: Array[Node] = turn.ability.find_children("*", "HitRate", false)
 	if children:
 		var hr: HitRate = children[0]
-		return hr.calculate(turn.actor, target)
+		return hr.calculate(target)
 	
 	print("Couldn't find Hit Rate")
 	return 0

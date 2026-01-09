@@ -21,3 +21,13 @@ var current_tile: Tile:
 
 func _ready():
 	state_machine.change_state(start_state)
+
+func get_parent_unit(node: Node):
+	var parent = node.get_parent()
+	if parent == null:
+		return null
+	
+	if parent is Unit:
+		return parent
+	
+	return get_parent_unit(parent)

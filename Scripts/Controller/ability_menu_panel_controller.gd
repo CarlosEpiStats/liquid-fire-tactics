@@ -1,6 +1,14 @@
 class_name AbilityMenuPanelController
 extends Node
 
+signal got_attack(info: Info)
+signal got_defense(info: Info)
+signal got_power(info: Info)
+signal tweaked_damage(info: Info)
+signal can_perform_checked(exc: BaseException)
+signal failed()
+signal did_perform()
+
 const SHOWKEY := "Show"
 const HIDEKEY := "Hide"
 const ENTRYPOOLKEY := "AbilityMenuPanel.Entry"
